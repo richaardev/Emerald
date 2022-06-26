@@ -16,7 +16,7 @@ const Logger = createLogger({
   ],
   rejectionHandlers: [
     new transports.File({ filename: "rejections.log", dirname: "logs", maxsize: 1024000, level: "error" }),
-  ]
+  ],
 });
 
 export default Logger;
