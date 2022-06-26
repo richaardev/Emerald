@@ -16,6 +16,7 @@ export default class ListenerManager extends BaseManager {
 
     glob("src/listeners/**/*.{js,ts}", (err, files) => {
       if (err) throw err;
+      
       files.forEach(async (file) => {
         import(file).then(({ default: ListenerClass }: ListenerClassType) => {
           const listener = new ListenerClass(this.client);
