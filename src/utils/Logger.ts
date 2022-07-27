@@ -1,22 +1,35 @@
-import { createLogger, format, transports } from "winston";
-const { combine, timestamp, colorize, printf, prettyPrint } = format;
+import moment from "moment";
 
-const customFormat = printf(({ level, message, timestamp }) => {
-  return `${timestamp} [${level}]: ${message}`;
-});
+type LogLevel = "info" | "warn" | "error" | "debug";
 
-const Logger = createLogger({
-  format: combine(colorize(), timestamp(), customFormat),
-  transports: [
-    new transports.Console(),
-    new transports.File({ filename: "bot.log", dirname: "logs", maxsize: 1024000, level: "info" }),
-  ],
-  exceptionHandlers: [
-    new transports.File({ filename: "exceptions.log", dirname: "logs", maxsize: 1024000, level: "error" }),
-  ],
-  rejectionHandlers: [
-    new transports.File({ filename: "rejections.log", dirname: "logs", maxsize: 1024000, level: "error" }),
-  ],
-});
+class Logger {
+  // TODO: Per level colors;
+
+  static get #currentTime(): string {
+    return `${moment(Date.now()).format("HH:mm:ss")}`;
+  }
+
+  protected static log(messages: any[], level: LogLevel = "info") {
+    const message = messages.map((x) => String(x)).join(" ");
+    const levelText = `[${level.toLocaleUpperCase()}]`;
+    console[level](`[${this.#currentTime}] ${levelText}: ${message}`);
+  }
+
+  static info(...messages: any[]): void {
+    this.log(messages, "info");
+  }
+
+  static warn(...messages: any[]): void {
+    this.log(messages, "warn");
+  }
+
+  static debug(...messages: any[]): void {
+    this.log(messages, "debug");
+  }
+
+  static error(...messages: any[]): void {
+    this.log(messages, "error");
+  }
+}
 
 export default Logger;
