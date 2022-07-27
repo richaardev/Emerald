@@ -1,3 +1,3 @@
 export type ListenerManagerOptions = {
-  path: string
+  path: string;
 };

@@ -1,7 +1,7 @@
 import Manager from "@/managers";
 import { ClientOptions, Client as ErisClient } from "eris";
 
-export default class NanaClient extends ErisClient {
+export default class EmeraldClient extends ErisClient {
   public manager: Manager;
 
   constructor(token: string, options: ClientOptions = { intents: 46791 }) {

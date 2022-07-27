@@ -1,7 +1,7 @@
 import "dotenv/config";
-import NanaClient from "./NanaClient";
+import EmeraldClient from "./EmeraldClient";
 
-const client = new NanaClient(process.env.TOKEN!, {
+const client = new EmeraldClient(process.env.TOKEN!, {
   intents: 46791,
   autoreconnect: true,
   defaultImageSize: 2048,
@@ -10,4 +10,4 @@ const client = new NanaClient(process.env.TOKEN!, {
 });
 client.start();
 
-export { NanaClient };
+export { EmeraldClient };

@@ -1,11 +1,11 @@
 {
-  "name": "nana",
+  "name": "emerald",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "start": "",
-    "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "dev": "node -r @swc-node/register src/index.ts",
     "build": "",
     "eslint:fix": "eslint . --fix"
   },
@@ -19,9 +19,16 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "@swc-node/register": "^1.5.1",
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.215",
+    "chalk": "4.1.2",
     "dotenv": "^16.0.1",
     "eris": "^0.17.0",
+    "eslint-plugin-import": "^2.26.0",
+    "fast-glob": "^3.2.11",
     "glob": "^8.0.3",
+    "moment": "^2.29.4",
     "tsconfig-paths": "^4.0.0",
     "winston": "^3.8.0"
   }

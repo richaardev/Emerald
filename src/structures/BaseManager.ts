@@ -1,9 +1,9 @@
-import NanaClient from "@/NanaClient";
+import EmeraldClient from "@/EmeraldClient";
 
 export default class BaseManager {
-  constructor(public client: NanaClient) {}
+  constructor(public client: EmeraldClient) {}
 
-  load(): boolean {
+  load(): Promise<boolean> | boolean {
     return false;
   }
 }
