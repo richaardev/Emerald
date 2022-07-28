@@ -1,11 +1,9 @@
-import Client from "@/EmeraldClient";
+import EmeraldClient from "@/EmeraldClient";
 import RegistryModule from "./RegistryModule";
 
 export default class Listener extends RegistryModule {
-  public client: Client;
-  constructor(client: Client) {
+  constructor(public client: EmeraldClient<true>) {
     super();
-    this.client = client;
 
     this.getMethods().forEach((method) => {
       // @ts-ignore

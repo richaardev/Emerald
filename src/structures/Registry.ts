@@ -31,7 +31,7 @@ export default class Registry extends EventEmitter {
 
       module.__path = path;
       this.modules.push(module);
-      
+
       this.emit("load", module);
       return true;
     } catch (err) {
@@ -71,7 +71,7 @@ export default class Registry extends EventEmitter {
     const watcher = chokidar.watch(watchPath, {
       interval: 500,
     });
-    
+
     watcher.on("change", (path) => this.reloadModule(this.findByFilename(path)));
   }
 

@@ -1,6 +1,6 @@
 import { Listener } from "@/structures";
 import { Logger } from "@/utils";
-import { Message } from "eris";
+import { Message } from "discord.js";
 
 export default class ClientListener extends Listener {
   onReady() {

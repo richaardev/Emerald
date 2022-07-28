@@ -1,16 +1,16 @@
-import { ClientOptions, Client as ErisClient } from "eris";
+import { ClientOptions, Client } from "discord.js";
 import ListenerRegistry from "./registry/ListenerRegistry";
 
-export default class EmeraldClient extends ErisClient {
+export default class EmeraldClient<Ready extends boolean = boolean> extends Client<Ready> {
   public listenerRegistry: ListenerRegistry;
-
-  constructor(token: string, options: ClientOptions = { intents: 46791 }) {
-    super(token, options);
+ 
+  constructor(private _token: string, options: ClientOptions = { intents: 46791 }) {
+    super(options);
 
     this.listenerRegistry = new ListenerRegistry(this);
   }
 
   async start(): Promise<void> {
-    await super.connect();
+    await super.login(this._token);
   }
 }
