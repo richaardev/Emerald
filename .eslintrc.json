@@ -16,6 +16,7 @@
     "quotes": ["error", "double"],
     "import/extensions": "off",
     "sort-imports": "off",
-    "@typescript-eslint/quotes": ["error", "double"]
+    "@typescript-eslint/quotes": ["error", "double"],
+    "@typescript-eslint/lines-between-class-members": "off"
   }
 }

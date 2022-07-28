@@ -1,17 +1,16 @@
-import Manager from "@/managers";
 import { ClientOptions, Client as ErisClient } from "eris";
+import ListenerRegistry from "./registry/ListenerRegistry";
 
 export default class EmeraldClient extends ErisClient {
-  public manager: Manager;
+  public listenerRegistry: ListenerRegistry;
 
   constructor(token: string, options: ClientOptions = { intents: 46791 }) {
     super(token, options);
 
-    this.manager = new Manager(this);
+    this.listenerRegistry = new ListenerRegistry(this);
   }
 
   async start(): Promise<void> {
-    await this.manager.load();
     await super.connect();
   }
 }

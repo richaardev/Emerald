@@ -10,7 +10,7 @@ class Logger {
   }
 
   protected static log(messages: any[], level: LogLevel = "info") {
-    const message = messages.map((x) => String(x)).join(" ");
+    const message = messages.map((x) => String(x)).join("");
     const levelText = `[${level.toLocaleUpperCase()}]`;
     console[level](`[${this.#currentTime}] ${levelText}: ${message}`);
   }
