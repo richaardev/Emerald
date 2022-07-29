@@ -6,6 +6,7 @@ export default class PingCommand extends Command {
   constructor(client: EmeraldClient) {
     super(client, {
       name: "ping",
+      description: "Veja o ping do bot",
       requirements: {},
     });
   }

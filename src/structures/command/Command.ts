@@ -4,7 +4,7 @@ import RegistryModule from "../RegistryModule";
 import { CommandContext } from "./context/CommandContext";
 
 type CommandOptions = {
-  name?: string; // original command name
+  name: string; // original command name
   aliases?: string; // aliases for the command do not work aliases for slash commands
   description?: string;
 

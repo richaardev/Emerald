@@ -5,5 +5,7 @@ export class SlashCommandContext extends CommandContext {
   constructor(public client: EmeraldClient, data: CommandContextData) {
     super(data);
   }
-  reply(_options: string): void {}
+  reply(options: any): void {
+    this._interaction!.reply(options);
+  }
 }

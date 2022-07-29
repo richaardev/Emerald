@@ -1,12 +1,26 @@
 import { Listener } from "@/structures";
-import { PrefixedCommandContext } from "@/structures/command/context";
+import { PrefixedCommandContext, SlashCommandContext } from "@/structures/command/context";
 import { Logger } from "@/utils";
-import { Message } from "discord.js";
+import { Interaction, Message } from "discord.js";
 
 export default class ClientListener extends Listener {
   onReady() {
     Logger.info(`The super ${this.client.user.username} is ready to action!`);
   }
+
+  onInteractionCreate(interaction: Interaction) {
+    if (!interaction.isChatInputCommand()) return;
+    const command = this.client.registry.commands.getCommand(interaction.commandName);
+
+    if (command) {
+      const context = new SlashCommandContext(this.client, {
+        interaction,
+      });
+      
+      command.execute(context);
+    }
+  }
+
   onMessageCreate(message: Message) {
     const prefix = "e!";
 
@@ -15,7 +29,7 @@ export default class ClientListener extends Listener {
     const args = message.content.trim().slice(prefix.length).split(/ +/g);
     const commandName = args.shift()?.toLowerCase();
 
-    const command = this.client.commandRegistry.getCommand(commandName!);
+    const command = this.client.registry.commands.getCommand(commandName!);
     if (command) {
       const context = new PrefixedCommandContext(this.client, {
         message,
