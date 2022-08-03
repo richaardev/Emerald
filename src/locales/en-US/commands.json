@@ -1,3 +1,5 @@
 {
-  "ping": "Pong!"
+  "ping": {
+    "response": "Pong! Currenty i have `{{ms}}ms`!"
+  }
 }

@@ -2,7 +2,7 @@ import EmeraldClient from "@/EmeraldClient";
 import { Logger } from "@/utils";
 import { EventEmitter } from "node:events";
 import { readdirSync, lstatSync } from "node:fs";
-import { resolve } from "node:path";
+import { basename, resolve } from "node:path";
 import chokidar from "chokidar";
 import RegistryModule from "./RegistryModule";
 
@@ -52,17 +52,22 @@ export default class Registry extends EventEmitter {
 
   deleteModule(object: RegistryModule) {
     const index = this.modules.findIndex((module) => module.__path === object.__path);
-    this.modules.splice(index, 1);
+    if (index) {
+      this.modules.splice(index, 1);
+    }
     this.emit("delete", object);
   }
 
-  async reloadModule(object: RegistryModule) {
+  async reloadModule(path: string) {
     try {
-      const module = this.modules.filter((m) => m.__path === object.__path)[0];
-      await this.deleteModule(module);
-      await this.load(module.__path);
+      const module = this.modules.filter((m) => m.__path.endsWith(path))[0];
+      if (module) await this.deleteModule(module);
+
+      Logger.debug("Reloading module " + basename(path));
+      await this.load(resolve(path));
     } catch (err) {
-      if (err instanceof Error) Logger.error("Error while trying to reload module: ", err.stack);
+      if (err instanceof Error)
+        Logger.error("Error while trying to reload module: ", path, err.stack);
     }
   }
 
@@ -72,10 +77,6 @@ export default class Registry extends EventEmitter {
       interval: 500,
     });
 
-    watcher.on("change", (path) => this.reloadModule(this.findByFilename(path)));
-  }
-
-  findByFilename(path: string) {
-    return this.modules.filter((module) => module.__path.endsWith(path))[0];
+    watcher.on("change", (path) => this.reloadModule(path));
   }
 }

@@ -1,3 +1,4 @@
+import { FixedT } from "@/registry/I18nRegistry";
 import {
   APIInteractionGuildMember,
   CommandInteraction,
@@ -10,6 +11,7 @@ import {
 export type CommandContextData = {
   message?: Message;
   interaction?: CommandInteraction;
+  t?: FixedT;
 };
 
 export abstract class CommandContext {
@@ -18,6 +20,7 @@ export abstract class CommandContext {
   public author: User;
   public member?: GuildMember | APIInteractionGuildMember | undefined | null;
   public guild?: Guild | null;
+  public t: FixedT;
 
   constructor(data: CommandContextData) {
     this._interaction = data.interaction;
@@ -26,6 +29,11 @@ export abstract class CommandContext {
     this.author = (data.message?.author ?? data.interaction?.user)!;
     this.member = data.message?.member ?? data.interaction?.member;
     this.guild = data.message?.guild ?? data.interaction?.guild;
+    this.t =
+      data.t ??
+      function fixedT(translation: string) {
+        return translation;
+      };
 
     if (this.author == null) {
       throw new Error("WTF???");
