@@ -47,10 +47,11 @@ export default class ClientListener extends Listener {
       const t = this.client.registry.i18n.getFixedT("en-US");
       const context = new PrefixedCommandContext(this.client, {
         message,
+        args,
         t,
       });
 
-      command.execute(context);
+      command._execute(context);
     }
   }
 }

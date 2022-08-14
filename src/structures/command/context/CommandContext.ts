@@ -1,30 +1,29 @@
+import { EmeraldClient } from "@";
 import { FixedT } from "@/registry/I18nRegistry";
-import {
-  APIInteractionGuildMember,
-  CommandInteraction,
-  Guild,
-  GuildMember,
-  Message,
-  User,
-} from "discord.js";
+import { APIInteractionGuildMember, CommandInteraction, Guild, GuildMember, Message, User } from "discord.js";
 
 export type CommandContextData = {
   message?: Message;
   interaction?: CommandInteraction;
   t?: FixedT;
+  args?: string[];
 };
 
 export abstract class CommandContext {
+  public client: EmeraldClient;
   public _message: Message | undefined;
   public _interaction: CommandInteraction | undefined;
   public author: User;
   public member?: GuildMember | APIInteractionGuildMember | undefined | null;
   public guild?: Guild | null;
   public t: FixedT;
+  public args: string[];
 
-  constructor(data: CommandContextData) {
-    this._interaction = data.interaction;
+  constructor(client: EmeraldClient, data: CommandContextData) {
+    this.client = client;
     this._message = data.message;
+    this._interaction = data.interaction;
+    this.args = data.args ?? [];
 
     this.author = (data.message?.author ?? data.interaction?.user)!;
     this.member = data.message?.member ?? data.interaction?.member;
@@ -39,7 +38,10 @@ export abstract class CommandContext {
       throw new Error("WTF???");
     }
   }
-
   // TODO: Add more options
   abstract reply(options: string): void;
+
+  isSlashCommand(): boolean {
+    return this._interaction !== null;
+  }
 }
