@@ -1,9 +1,9 @@
 import EmeraldClient from "@/EmeraldClient";
 import { Logger } from "@/utils";
-import { EventEmitter } from "node:events";
-import { readdirSync, lstatSync } from "node:fs";
-import { basename, resolve } from "node:path";
 import chokidar from "chokidar";
+import { EventEmitter } from "node:events";
+import { lstatSync, readdirSync } from "node:fs";
+import { basename, resolve } from "node:path";
 import RegistryModule from "./RegistryModule";
 
 type RegistryOptions = {
@@ -53,7 +53,7 @@ export default class Registry extends EventEmitter {
   deleteModule(object: RegistryModule) {
     const index = this.modules.findIndex((module) => module.__path === object.__path);
     if (index) {
-      this.modules.splice(index, 1);
+      this.modules = this.modules.filter((mol) => mol.__path !== object.__path);
     }
     this.emit("delete", object);
   }

@@ -1,10 +1,7 @@
 import EmeraldClient from "@/EmeraldClient";
 import { Command } from "@/structures";
 import Registry from "@/structures/Registry";
-import {
-  ApplicationCommandDataResolvable,
-  ApplicationCommandType,
-} from "discord.js";
+import { ApplicationCommandDataResolvable, ApplicationCommandType } from "discord.js";
 
 export default class CommandRegistry extends Registry {
   public override modules: Command[];
@@ -33,9 +30,9 @@ export default class CommandRegistry extends Registry {
         name: command.options.name,
         description: command.options.description ?? "No description",
         type: ApplicationCommandType.ChatInput,
-        dmPermission: command.options.requirements.dmEnabled,
+        dmPermission: command.options.requirements.dmEnabled ?? true,
+        options: command.options.parameters ?? [],
       };
-
       if (oldSlash) {
         oldSlash.edit(newCommandData);
       } else {

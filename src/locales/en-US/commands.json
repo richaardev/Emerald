@@ -1,5 +1,12 @@
 {
   "ping": {
     "response": "Pong! Currenty i have `{{ms}}ms`!"
+  },
+  "avatar": {
+    "title": "{{user}}'s avatar",
+    "download": "Download avatar",
+
+    "inspiration": "Nothing beyond the horizon is unrivaled like you ❤",
+    "myself": "Ohh! Look at this, its me!!!"
   }
 }

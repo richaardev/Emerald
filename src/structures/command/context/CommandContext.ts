@@ -1,18 +1,22 @@
 import { EmeraldClient } from "@";
 import { FixedT } from "@/registry/I18nRegistry";
-import { APIInteractionGuildMember, CommandInteraction, Guild, GuildMember, Message, User } from "discord.js";
+import {
+  APIInteractionGuildMember,
+  ChatInputCommandInteraction,
+  Guild,
+  GuildMember,
+  User,
+} from "discord.js";
 
 export type CommandContextData = {
-  message?: Message;
-  interaction?: CommandInteraction;
+  interaction: ChatInputCommandInteraction;
   t?: FixedT;
   args?: string[];
 };
 
 export abstract class CommandContext {
   public client: EmeraldClient;
-  public _message: Message | undefined;
-  public _interaction: CommandInteraction | undefined;
+  public _interaction: ChatInputCommandInteraction;
   public author: User;
   public member?: GuildMember | APIInteractionGuildMember | undefined | null;
   public guild?: Guild | null;
@@ -21,13 +25,12 @@ export abstract class CommandContext {
 
   constructor(client: EmeraldClient, data: CommandContextData) {
     this.client = client;
-    this._message = data.message;
     this._interaction = data.interaction;
     this.args = data.args ?? [];
 
-    this.author = (data.message?.author ?? data.interaction?.user)!;
-    this.member = data.message?.member ?? data.interaction?.member;
-    this.guild = data.message?.guild ?? data.interaction?.guild;
+    this.author = data.interaction?.user!;
+    this.member = data.interaction?.member;
+    this.guild = data.interaction?.guild;
     this.t =
       data.t ??
       function fixedT(translation: string) {
@@ -39,8 +42,8 @@ export abstract class CommandContext {
     }
   }
   // TODO: Add more options
-  abstract reply(options: string): void;
 
+  abstract reply(options: string): void;
   isSlashCommand(): boolean {
     return this._interaction !== null;
   }
