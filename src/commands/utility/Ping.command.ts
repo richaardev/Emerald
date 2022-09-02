@@ -1,6 +1,5 @@
 import EmeraldClient from "@/EmeraldClient";
-import { Command } from "@/structures";
-import { CommandContext } from "@/structures/command/context/CommandContext";
+import { Command, CommandContext } from "@/structures";
 
 export default class PingCommand extends Command {
   constructor(client: EmeraldClient) {

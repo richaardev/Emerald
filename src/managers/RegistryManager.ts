@@ -1,6 +1,5 @@
-import CommandRegistry from "@/registry/CommandRegistry";
-import I18nRegistry from "@/registry/I18nRegistry";
-import ListenerRegistry from "@/registry/ListenerRegistry";
+import { CommandRegistry, I18nRegistry, ListenerRegistry } from "@/registry";
+
 import { EmeraldClient } from "..";
 
 export default class RegistryManager {

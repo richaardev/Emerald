@@ -1,5 +1,4 @@
-import { Listener } from "@/structures";
-import { SlashCommandContext } from "@/structures/command/context";
+import { Listener, SlashCommandContext } from "@/structures";
 import { Logger } from "@/utils";
 import { Interaction } from "discord.js";
 

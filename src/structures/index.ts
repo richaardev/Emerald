@@ -4,4 +4,3 @@ import RegistryModule from "./RegistryModule";
 
 export * from "./command";
 export { Listener, Registry, RegistryModule };
-

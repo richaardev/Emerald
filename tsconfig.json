@@ -18,6 +18,7 @@
       "@": ["src/index"],
       "@/*": ["src/*"],
       "@/structures/*": ["src/structures/*"],
+      "@/registry/*": ["src/registry/*"],
       "@/managers/*": ["src/managers/*"],
       "@/utils/*": ["src/utils/*"]
     }
