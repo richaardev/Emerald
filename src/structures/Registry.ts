@@ -72,7 +72,7 @@ export default class Registry extends EventEmitter {
   }
 
   startWatch(watchPath: string) {
-    Logger.debug("Starting watcher for ", this.constructor.name);
+    Logger.debug("Starting watcher for", this.constructor.name);
     const watcher = chokidar.watch(watchPath, {
       interval: 500,
     });

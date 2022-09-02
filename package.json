@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "",
-    "dev": "node -r @swc-node/register src/index.ts",
+    "dev": "node -r @swc-node/register src/launcher.ts",
     "build": "",
     "eslint:fix": "eslint . --fix"
   },

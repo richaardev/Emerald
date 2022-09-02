@@ -12,7 +12,9 @@ export default class Listener extends RegistryModule {
   }
 
   getMethods() {
-    return Object.getOwnPropertyNames(Object.getPrototypeOf(this)).filter((method) => method.startsWith("on"));
+    return Object.getOwnPropertyNames(Object.getPrototypeOf(this)).filter((method) =>
+      method.startsWith("on"),
+    );
   }
 
   load() {

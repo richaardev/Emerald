@@ -30,7 +30,7 @@ export default class CommandRegistry extends Registry {
         name: command.options.name,
         description: command.options.description ?? "No description",
         type: ApplicationCommandType.ChatInput,
-        dmPermission: command.options.requirements.dmEnabled ?? true,
+        dmPermission: command.options.requirements?.dmEnabled ?? true,
         options: command.options.parameters ?? [],
       };
       if (oldSlash) {

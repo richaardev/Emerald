@@ -5,10 +5,9 @@ import { CommandContext } from "./context/CommandContext";
 
 type CommandOptions = {
   name: string; // original command name
-  aliases?: string; // aliases for the command do not work aliases for slash commands
   description?: string;
 
-  requirements: CommandRequirements;
+  requirements?: CommandRequirements;
   parameters?: ApplicationCommandOptionData[];
 };
 
@@ -23,7 +22,7 @@ export abstract class Command extends RegistryModule {
     super();
   }
 
-  abstract execute(context: CommandContext, ...args: any): void;
+  abstract execute(context: CommandContext): void;
   async _execute(context: CommandContext) {
     this.execute(context);
   }

@@ -3,7 +3,7 @@ import { Command } from "@/structures";
 import { CommandContext } from "@/structures/command/context/CommandContext";
 import { user } from "@/structures/command/parameters/user";
 import EmeraldEmbed from "@/utils/EmeraldEmbed";
-import MessageActionRowBuilder from "@/utils/MessageActionRowBuilder";
+import MessageActionRowBuilder from "@/utils/builders/MessageActionRowBuilder";
 import { ButtonBuilder } from "discord.js";
 
 export default class AvatarCommand extends Command {
@@ -27,6 +27,7 @@ export default class AvatarCommand extends Command {
       .setTitle(t("commands:avatar.title", { user: usr.username }))
       .setImage(usr.displayAvatarURL({ size: 2048 }));
 
+    
     if (usr === author)
       embed.setFooter({
         text: t("commands:avatar.inspiration"),

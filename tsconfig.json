@@ -16,7 +16,10 @@
     "typeRoots": ["./node_modules/@types", "src/@types"],
     "paths": {
       "@": ["src/index"],
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@/structures/*": ["src/structures/*"],
+      "@/managers/*": ["src/managers/*"],
+      "@/utils/*": ["src/utils/*"]
     }
   },
   "include": ["./src/**/*"],
