@@ -2,9 +2,25 @@ import EmeraldClient from "@/EmeraldClient";
 import Registry from "@/structures/Registry";
 import RegistryModule from "@/structures/RegistryModule";
 import { Logger } from "@/utils";
-import { basename, dirname } from "path";
+import { basename, dirname, join } from "path";
+import { fileURLToPath } from "url";
 
-export type FixedT = (translation: string, placeholders?: object) => string;
+import commandsJson from "@/locales/en-US/commands.json";
+
+type DotPrefix<T extends string> = T extends "" ? "" : `.${T}`;
+type DotNestedKeys<T> = (
+  T extends object
+    ? {
+      [K in Exclude<keyof T, symbol>]: `${K}${DotPrefix<DotNestedKeys<T[K]>>}`;
+    }[Exclude<keyof T, symbol>]
+    : ""
+) extends infer D
+  ? Extract<D, string>
+  : never;
+
+export type CommandsNamespace = `commands:${DotNestedKeys<typeof commandsJson>}`;
+export type TranslationKey = CommandsNamespace;
+export type FixedT = (translation: TranslationKey, placeholders?: object) => string;
 
 class LanguageModule extends RegistryModule {
   private translations: object;
@@ -41,7 +57,7 @@ export default class I18nRegistry extends Registry {
 
   constructor(client: EmeraldClient) {
     super(client, {
-      path: "src/locales",
+      path: join(fileURLToPath(import.meta.url), "../../", "locales"),
       autoReload: process.env.PRODUCTION == undefined,
     });
 
@@ -72,8 +88,9 @@ export default class I18nRegistry extends Registry {
 
   override async load(path: string): Promise<boolean> {
     try {
-      delete require.cache[require.resolve(path)];
-      const data = (await import(path)).default;
+      const data = await import(path, {
+        assert: { type: "json" },
+      });
       const namespace = basename(path);
       const language = basename(dirname(path));
 

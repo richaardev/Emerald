@@ -8,5 +8,9 @@
 
     "inspiration": "Nothing beyond the horizon is unrivaled like you ❤",
     "myself": "Ohh! Look at this, its me!!!"
+  },
+  "ban": {
+    "users_not_found": "Users not found!",
+    "users_ban_limit": "You can only ban 20 users per time"
   }
 }

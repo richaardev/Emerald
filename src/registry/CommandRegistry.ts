@@ -2,13 +2,15 @@ import EmeraldClient from "@/EmeraldClient";
 import { Command } from "@/structures";
 import Registry from "@/structures/Registry";
 import { ApplicationCommandDataResolvable, ApplicationCommandType } from "discord.js";
+import { join } from "path";
+import { fileURLToPath } from "url";
 
 export default class CommandRegistry extends Registry {
   public override modules: Command[];
 
   constructor(client: EmeraldClient) {
     super(client, {
-      path: "src/commands",
+      path: join(fileURLToPath(import.meta.url), "../../", "commands"),
       autoReload: process.env.PRODUCTION == undefined,
     });
 

@@ -26,7 +26,7 @@ export default class Registry extends EventEmitter {
 
   async load(path: string) {
     try {
-      delete require.cache[require.resolve(path)];
+      // delete require.cache[require.resolve(path)];
       const module = new (await import(path)).default(this.client);
 
       module.__path = path;

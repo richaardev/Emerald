@@ -11,6 +11,7 @@ export default class PingCommand extends Command {
   }
 
   execute(context: CommandContext): void {
+    
     context.reply(context.t("commands:ping.response", { ms: this.client.ws.ping }));
   }
 }

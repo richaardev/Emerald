@@ -6,3 +6,4 @@ logs/
 .env
 .idea
 .
+node-warnings.log

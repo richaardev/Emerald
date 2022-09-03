@@ -38,7 +38,7 @@ export default class AvatarCommand extends Command {
     const row = new MessageActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setURL(usr.displayAvatarURL({ extension: "png" }))
-        .setLabel(t("commands:avatar")),
+        .setLabel(t("commands:avatar.download")),
     );
 
     _interaction.reply({

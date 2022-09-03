@@ -4,7 +4,11 @@ import { Interaction } from "discord.js";
 
 export default class ClientListener extends Listener {
   onReady() {
-    Logger.info(`The super ${this.client.user.username} is ready to action!`);
+    const users = this.client.users.cache.size;
+    const guilds = this.client.guilds.cache.size;
+    Logger.info(
+      `${this.client.user.username} is is now online with ${guilds} guilds and ${users} users!`,
+    );
   }
 
   onInteractionCreate(interaction: Interaction) {
