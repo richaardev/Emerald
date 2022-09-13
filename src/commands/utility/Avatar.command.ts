@@ -1,11 +1,11 @@
-import { EmeraldClient } from "@";
+import { RubyClient } from "@";
 import { Command, CommandContext, user } from "@/structures";
 import { EmeraldEmbed } from "@/utils";
 import MessageActionRowBuilder from "@/utils/builders/MessageActionRowBuilder";
 import { ButtonBuilder } from "discord.js";
 
 export default class AvatarCommand extends Command {
-  constructor(client: EmeraldClient) {
+  constructor(client: RubyClient) {
     super(client, {
       name: "avatar",
       description: "Veja o seu avatar ou o avatar de alguém",

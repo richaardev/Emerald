@@ -1,4 +1,4 @@
-import { EmeraldClient } from "@";
+import { RubyClient } from "@";
 import { FixedT } from "@/registry/I18nRegistry";
 import {
   APIInteractionGuildMember,
@@ -15,7 +15,7 @@ export type CommandContextData = {
 };
 
 export abstract class CommandContext {
-  public client: EmeraldClient;
+  public client: RubyClient;
   public _interaction: ChatInputCommandInteraction;
   public author: User;
   public member?: GuildMember | APIInteractionGuildMember | undefined | null;
@@ -23,7 +23,7 @@ export abstract class CommandContext {
   public t: FixedT;
   public args: string[];
 
-  constructor(client: EmeraldClient, data: CommandContextData) {
+  constructor(client: RubyClient, data: CommandContextData) {
     this.client = client;
     this._interaction = data.interaction;
     this.args = data.args ?? [];

@@ -1,4 +1,4 @@
-import EmeraldClient from "./EmeraldClient";
-import EmeraldConfig from "./EmeraldConfig";
+import RubyClient from "./RubyClient";
+import EmeraldConfig from "./RubyConfig";
 
-export { EmeraldClient, EmeraldConfig };
+export { RubyClient, EmeraldConfig };

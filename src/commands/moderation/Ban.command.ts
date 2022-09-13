@@ -1,9 +1,10 @@
-import { EmeraldClient } from "@";
+import { RubyClient } from "@";
 import { Command, CommandContext, string } from "@/structures";
-import { GuildMember } from "discord.js";
+import MessageActionRowBuilder from "@/utils/builders/MessageActionRowBuilder";
+import { ButtonBuilder, ButtonStyle, GuildMember } from "discord.js";
 
 export default class BanCommand extends Command {
-  constructor(client: EmeraldClient) {
+  constructor(client: RubyClient) {
     super(client, {
       name: "ban",
       description: "Bane certos usuários do servidor",
@@ -32,19 +33,33 @@ export default class BanCommand extends Command {
     const members = (await Promise.allSettled([...promises]))
       .filter((result) => result.status !== "rejected")
       .map((result) => (result as PromiseFulfilledResult<GuildMember>).value);
-      
+
     if (members.length < 1)
       return _interaction.reply({ content: t("commands:ban.users_not_found") });
 
-    if (members.length <= 20)
+    if (members.length >= 20)
       return _interaction.reply({ content: t("commands:ban.users_ban_limit") });
 
-    for (let member of members) {
-      member.ban({
-        deleteMessageDays: 7,
-        reason: softReason,
-      });
-    }
+    const row = new MessageActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setLabel(t("commands:ban.confirm"))
+        .setStyle(ButtonStyle.Primary)
+        .setCustomId("ban_confirmation"),
+    );
+
+    _interaction.reply({
+      content: t("commands:ban.ban_confirmation"),
+      components: [row],
+    });
+
+    
+
+    // for (let member of members) {
+    //   member.ban({
+    //     deleteMessageDays: 7,
+    //     reason: softReason,
+    //   });
+    // }
   }
 
   getIds(iterator: IterableIterator<RegExpMatchArray>) {

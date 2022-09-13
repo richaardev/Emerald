@@ -1,8 +1,8 @@
-import EmeraldClient from "@/EmeraldClient";
-import RegistryModule from "./RegistryModule";
+import { RegistryModule } from "@/registry";
+import RubyClient from "@/RubyClient";
 
 export default class Listener extends RegistryModule {
-  constructor(public client: EmeraldClient<true>) {
+  constructor(public client: RubyClient<true>) {
     super();
 
     this.getMethods().forEach((method) => {

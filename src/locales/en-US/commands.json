@@ -10,6 +10,8 @@
     "myself": "Ohh! Look at this, its me!!!"
   },
   "ban": {
+    "confirm": "Confirm",
+    "ban_confirmation": "You are about to ban {{user}} click the button below to confirm",
     "users_not_found": "Users not found!",
     "users_ban_limit": "You can only ban 20 users per time"
   }

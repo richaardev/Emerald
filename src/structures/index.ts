@@ -1,6 +1,5 @@
 import Listener from "./Listener";
-import Registry from "./Registry";
-import RegistryModule from "./RegistryModule";
+import Registry from "./Registries";
 
 export * from "./command";
-export { Listener, Registry, RegistryModule };
+export { Listener, Registry as Manager };

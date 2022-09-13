@@ -13,12 +13,12 @@ export default class ClientListener extends Listener {
 
   onInteractionCreate(interaction: Interaction) {
     if (!interaction.isChatInputCommand()) return;
-    const command = this.client.registry.commands.getCommand(interaction.commandName);
+    const command = this.client.registries.commandsRegistry.getCommand(interaction.commandName);
 
     if (command) {
       const context = new SlashCommandContext(this.client, {
         interaction,
-        t: this.client.registry.i18n.getFixedT("en-US"),
+        t: this.client.registries.i18nRegistry.getFixedT("en-US"),
       });
 
       command.execute(context);

@@ -1,8 +1,8 @@
-import EmeraldClient from "@/EmeraldClient";
+import RubyClient from "@/RubyClient";
 import { Command, CommandContext } from "@/structures";
 
 export default class PingCommand extends Command {
-  constructor(client: EmeraldClient) {
+  constructor(client: RubyClient) {
     super(client, {
       name: "ping",
       description: "Veja o ping do bot",

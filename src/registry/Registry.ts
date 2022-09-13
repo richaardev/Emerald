@@ -1,4 +1,4 @@
-import EmeraldClient from "@/EmeraldClient";
+import RubyClient from "@/RubyClient";
 import { Logger } from "@/utils";
 import chokidar from "chokidar";
 import { EventEmitter } from "node:events";
@@ -15,7 +15,7 @@ export default class Registry extends EventEmitter {
   public path: string;
   public modules: RegistryModule[];
 
-  constructor(public client: EmeraldClient, public options: RegistryOptions) {
+  constructor(public client: RubyClient, public options: RegistryOptions) {
     super();
 
     this.path = options.path || process.exit(1);

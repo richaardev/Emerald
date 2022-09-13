@@ -1,9 +1,9 @@
-import EmeraldClient from "@/EmeraldClient";
-import Registry from "@/structures/Registry";
-import RegistryModule from "@/structures/RegistryModule";
+/* eslint-disable @typescript-eslint/indent */
+import RubyClient from "@/RubyClient";
 import { Logger } from "@/utils";
 import { basename, dirname, join } from "path";
 import { fileURLToPath } from "url";
+import { Registry, RegistryModule } from "./";
 
 import commandsJson from "@/locales/en-US/commands.json";
 
@@ -11,8 +11,8 @@ type DotPrefix<T extends string> = T extends "" ? "" : `.${T}`;
 type DotNestedKeys<T> = (
   T extends object
     ? {
-      [K in Exclude<keyof T, symbol>]: `${K}${DotPrefix<DotNestedKeys<T[K]>>}`;
-    }[Exclude<keyof T, symbol>]
+        [K in Exclude<keyof T, symbol>]: `${K}${DotPrefix<DotNestedKeys<T[K]>>}`;
+      }[Exclude<keyof T, symbol>]
     : ""
 ) extends infer D
   ? Extract<D, string>
@@ -55,7 +55,7 @@ class LanguageModule extends RegistryModule {
 export default class I18nRegistry extends Registry {
   public override modules: LanguageModule[];
 
-  constructor(client: EmeraldClient) {
+  constructor(client: RubyClient) {
     super(client, {
       path: join(fileURLToPath(import.meta.url), "../../", "locales"),
       autoReload: process.env.PRODUCTION == undefined,
@@ -88,12 +88,13 @@ export default class I18nRegistry extends Registry {
 
   override async load(path: string): Promise<boolean> {
     try {
-      const data = await import(path, {
-        assert: { type: "json" },
-      });
+      const data = (
+        await import(path, {
+          assert: { type: "json" },
+        })
+      ).default;
       const namespace = basename(path);
       const language = basename(dirname(path));
-
       const module = this.registerLanguage(language);
       module.loadNamespace(namespace.replace(".json", ""), data);
 

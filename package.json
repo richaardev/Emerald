@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node --redirect-warnings=node-warnings.log --experimental-specifier-resolution=node .",
     "build": "tsc --project tsconfig.json && resolve-tspaths",
-    "dev": "yarn build && yarn start",
+    "dev": "yarn clean && yarn build && yarn start",
+    "clean": "rm -rf dist/",
     "eslint:fix": "eslint . --fix"
   },
   "devDependencies": {
